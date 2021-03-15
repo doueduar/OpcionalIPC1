@@ -20,9 +20,14 @@ public class Juego {
     }
     public void jugar(){
         System.out.println("Bienvenido al juego del señor de los anillos: \n\n"); 
-
+        // inicializando a bestias con el metodo interno 
         this.inicializarBestias();
+        // 
         this.presentarPersonajes(ejercitoBestias);
+
+        this.inicializarHeroes();
+        
+        this.presentarPersonajes(ejercitoHeroes);
    
     }
     public void inicializarBestias(){
@@ -40,6 +45,27 @@ public class Juego {
                     break;
                 default:
                     ejercitoBestias[i] = new Orcos("Orco "+Orcos.getInstancias());
+                    break;
+            }
+        }
+    }
+
+    public void inicializarHeroes(){
+        int random = 0;
+        for (int i = 0; i < ejercitoHeroes.length; i++) {
+            random = Dado.tirarDado(0, 2, 1, false);
+            switch (random) {
+                case 0:
+                    ejercitoHeroes[i] = new Humanos("Humano "+Humanos.getInstancias());
+                    break;
+                case 1:
+                    ejercitoHeroes[i] = new Elfos("Elfo "+Elfos.getInstancias());
+                    break;
+                case 2:
+                    ejercitoHeroes[i] = new Hobbits("Hobbit "+Hobbits.getInstancias());
+                    break;
+                default:
+                    ejercitoHeroes[i] = new Elfos("Elfo "+Elfos.getInstancias());
                     break;
             }
         }
