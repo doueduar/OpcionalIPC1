@@ -16,6 +16,8 @@ public class Juego {
         // inicializar la cantidad de personajes 
         ejercitoBestias = new Bestias[CANTIDAD];
         ejercitoHeroes = new Heroes[CANTIDAD];
+
+
         
     }
     public void jugar(){
@@ -26,10 +28,64 @@ public class Juego {
         this.presentarPersonajes(ejercitoBestias);
 
         this.inicializarHeroes();
-        
         this.presentarPersonajes(ejercitoHeroes);
+
+        System.out.println("\n\n Iniciando pelea de bestias y heroes: \n\n");
+        this.pelea();
    
     }
+    public void peliadores(int bestia , int heroe){
+        int bestia1 = bestia;
+        int heroe1 = heroe;
+        while ( ( 0 < ejercitoBestias[bestia1].getVida() ) && ( 0 < ejercitoHeroes[heroe1].getVida() ) ) {
+            ejercitoBestias[bestia1].recibirAtaque(ejercitoHeroes[heroe1]);
+            ejercitoHeroes[heroe1].recibirAtaque(ejercitoBestias[bestia1]);
+        } 
+    }
+    public void pelea(){
+        for (int i = 0; i < ejercitoBestias.length; i++) {
+            this.peliadores(i, i);
+            if (0 < ejercitoBestias[i].getVida()) {
+                System.out.println("ganador: "+ ejercitoBestias[i].getNombre()+"\n\n");
+                ejercitoHeroes[i].setVida(0);
+            }
+            if (0 < ejercitoHeroes[i].getVida()){
+                System.out.println("ganador: "+ ejercitoHeroes[i].getNombre()+"\n\n");
+                ejercitoBestias[i].setVida(0);
+            }
+        }
+        System.out.println("Peliadores restantes: \n\n");
+        while ((ejercitoBestias != null) && ( ejercitoHeroes != null )) {
+            int restanteBestia =0;
+            while ( (ejercitoBestias[restanteBestia] != null) && (restanteBestia < CANTIDAD)  ) {
+                restanteBestia++;
+                if (5<restanteBestia) {
+                    ejercitoBestias = null;
+                    break;
+                }
+            }
+            int restanteHeroe =0;
+            while ( (ejercitoHeroes[restanteHeroe] != null) && ( restanteHeroe < CANTIDAD) ) {
+                restanteHeroe++;
+                if (5<restanteHeroe) {
+                    ejercitoHeroes = null;
+                    break;
+                }
+            }
+            if ( (restanteBestia < 6) && (restanteHeroe <6) ) {
+                this.peliadores(restanteBestia, restanteHeroe);
+            }
+            if (ejercitoBestias == null){
+                System.out.println("Ganador Heroes");
+            }
+            if (ejercitoHeroes == null){
+                System.out.println("Ganador Bestias");
+            }
+        }
+
+
+    }
+
     public void inicializarBestias(){
         int random = 0;
         // utiliza el for para calcular la cantidad del ejercito que se tiene 

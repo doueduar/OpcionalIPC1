@@ -39,8 +39,9 @@ public class Personajes {
     }
 
     public void saludar(){ System.out.println("Hola soy " + this.nombre); }
-    
+
     public int getVida() { return this.vida; }
+    public void setVida(int vida){ this.vida =  vida; }
 
     public int getAtaque() { return this.ataque; }
 
